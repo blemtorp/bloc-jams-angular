@@ -21,6 +21,11 @@
              controller: 'CollectionCtrl as collection',
              templateUrl: '/templates/collection.html'
         });
+         .state('collection', {
+             url: '/collection',
+             controller: 'AlbumCtrl as album',
+             templateUrl: '/templates/album.html'
+        });
      }
 
 angular
