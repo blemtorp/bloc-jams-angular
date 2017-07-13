@@ -1,8 +1,13 @@
 (function() {
-     function SongPlayer() {
-          var SongPlayer = {};
+     function SongPlayer(Fixtures) {
+         var SongPlayer = {};
+         var currentAlbum = Fixtures.getAlbum();
           
-          var currentSong = null;
+         var getSongIndex = function(song){
+             return currentAlbum.songs.indexOf(song);
+         }
+         // Raj: Don't get, not defined - see belown how currentSong is declared
+         songPlayer.currentSong = Null
          /**
          * @desc Buzz object audio file
          * @type {Object}
@@ -33,11 +38,13 @@
      * @param {Object} song
      */
      var playSong = function(song) {
+            // Ask Raj about the currentBuzzObject
             currentBuzzObject.play();
             song.playing = true;
      };
          
      SongPlayer.play = function(song) {
+         song = song || SongPlayer.currentSong;
          if (currentSong !== song) {
              setSong(song);
              currentBuzzObject.play();    
@@ -54,8 +61,29 @@
      * @param {Object} song
      */
      SongPlayer.pause = function(song) {
+         song = song || SongPlayer.currentSong;
          currentBuzzObject.pause();
          song.playing = false;
+     };
+        
+      /**
+     * @function previous
+     * @desc Skips to previous song
+     * @param {Object} song
+     */ 
+     Songplayer.previus = function() {
+         var currentSongIndex = getSongIndex(SongPlayer.currentSong);
+         currentSongIndex--;
+         
+         if (currentSongIndex < 0) {
+             currentBuzzObject.stop();
+             SongPlayer.currentSong.playing = null;
+         } else {
+             var song = currentAlbum.songs[currentSongIndex];
+             setSong(song);
+             playSong(song);
+             playSong(song);
+         }
      };
          
          return SongPlayer;
@@ -63,5 +91,5 @@
  
      angular
          .module('blocJams')
-         .factory('SongPlayer', SongPlayer);
+         .factory('SongPlayer', ['Fixtures', SongPlayer]);
  })();
