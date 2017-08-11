@@ -11,7 +11,6 @@
          </div>
      </section>
      <table class="album-view-song-list">
-         <!--should be songs - ask Raj about it - album.albumData.songs-->
           <tr class="album-view-song-item" ng-mouseover="hovered = true" ng-mouseleave="hovered = false" ng-repeat="song in album.albumData.songs">
              <td class="song-item-number">
                 <span ng-show="!song.playing && !hovered">{{ ($index +1) }}</span>
@@ -19,7 +18,8 @@
                 <a class="album-song-button" ng-show="song.playing" ng-click="album.songPlayer.pause(song)"><span class="ion-pause"></span></a>
               </td>
              <td class="song-item-title">{{ song.title }}</td>
-             <td class="song-item-duration">{{ song.duration | timecode }}</td>
+             <!--td class="song-item-duration">{{ song.duration | timecode }}</td-->
+             <td class="song-item-duration">{{ song.duration }}</td>
          </tr>
      </table>
 </main>

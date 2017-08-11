@@ -29,13 +29,13 @@
                      <div class="fill"></div>
                      <div class="thumb"></div>
                  </div>
-                 <div class="current-time"></div>
-                 <div class="total-time"></div>
+                 <div class="current-time">{{ playerBar.songPlayer.currentTime | timecode }}</div>
+                 <div class="total-time">{{ playerBar.songPlayer.currentSong.length | timecode }}</div>
              </div>
          </div>
          <div class="control-group volume">
              <span class="icon ion-volume-high"></span>
-             <seek-bar></seek-bar>
+             <seek-bar value="{{ playerBar.songPlayer.currentTime }}" max="{{ playerBar.songPlayer.currentSong.duration }}" on-change="playerBar.songPlayer.setCurrentTime(value)"></seek-bar>
          </div>
      </div>
  </section>
